@@ -3,20 +3,20 @@ public class Shape
 {
 	private final int nbEdges;
 	private final int[] concavity;
+	private final int type;
 	private int rotation;
-	private boolean isUsed;
 
-	public Shape(int[] concavity){
+	public Shape(int[] concavity, int type){
 		nbEdges = length(concavity);
 		this.concavity = concavity;
+		this.type = type;
 		rotation = 0;//nécessaire ? quand on init, on met à 0
-		isUsed = false;
-	}
-	
-	public boolean isUsed(){
-		return isUsed;
 	}
 
+	public int getType(){
+		return type;
+	}
+	
 	public boolean rotate(){
 		if(rotation == nbEdges)
 			return false;

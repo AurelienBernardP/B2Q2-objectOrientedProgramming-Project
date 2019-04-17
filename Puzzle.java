@@ -18,7 +18,6 @@ public class Puzzle{
    public boolean threatens(Shape newShape){
       //à voir pour l'input de isCompatible
       if(facets.isCompatible(newShape.concavity) == true){
-         newShape.isUsed = true;
          this.shape = newShape;
          return true;
       }
@@ -26,6 +25,11 @@ public class Puzzle{
          return threatens(newShape);//newShape a été rotationné
 
       return false;
+   }
+
+   public void clearPosition(){
+      facets.clearConnection(shape.concavity);
+      shape = null;
    }
 
    //newShape

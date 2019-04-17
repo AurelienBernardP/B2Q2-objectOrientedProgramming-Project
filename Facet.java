@@ -1,7 +1,7 @@
 
 public class Facet{
    private final int[] connectionsFacets;
-   private static int[90] connectionsShapes;
+   private static int[90] concavityFacets;
 
    public Facet(int[] connections){
       connectionsFacets = connections;
@@ -13,12 +13,12 @@ public class Facet{
       int length = length(connectionsFacets);
 
       for (int i = 0; i < length; i++){
-         if(connectionsShapes[connectionsFacets[i]] == 0 ||
-            ((connectionsShapes[connectionsFacets[i]] + concavityNewShape[i]) == 0 )
-            connectionsShapes[connectionsFacets[i]] += concavityNewShape[i];
+         if(concavityFacets[connectionsFacets[i]] == 0 ||
+            ((concavityFacets[connectionsFacets[i]] + concavityNewShape[i]) == 0 )
+            concavityFacets[connectionsFacets[i]] += concavityNewShape[i];
          else{
             for (int j = 0; j < i; j++)
-               connectionsShapes[connectionsFacets[j]] -= concavityNewShape[j];
+               concavityFacets[connectionsFacets[j]] -= concavityNewShape[j];
             return false;
          }
       }
@@ -26,11 +26,11 @@ public class Facet{
    }
 
    public void clearConnections(int[] concavityShape){
-      int length = length(connectionsFacets);
+      int length = length(concavityShape);
 
-      for (int i = 0; i < length; i++){
-         connectionsShapes[connectionsFacets[i]] -= concavityNewShape[i];
-      }
+      for (int i = 0; i < length; i++)
+         concavityFacets[connectionsFacets[i]] -= concavityNewShape[i];
+
    }
 
 }

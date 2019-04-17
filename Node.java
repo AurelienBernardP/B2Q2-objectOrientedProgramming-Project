@@ -11,14 +11,26 @@
 public class Node
 {
     private Shape shape;
+    private Node previous;
     private Node next;
     
     public Node(Shape s)
     {
         shape = s;
+        previous = null;
         next = null;
     }
     
+    public Node getPrevious()
+    {
+        return previous;
+    }
+    
+    public void setPrevious(Node n)
+    {
+        previous = n;
+    }
+
     public Node getNext()
     {
         return next;
