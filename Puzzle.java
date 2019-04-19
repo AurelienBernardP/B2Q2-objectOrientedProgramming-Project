@@ -2,14 +2,35 @@
 public class Puzzle{
    private final int position;
    private final boolean isHexagone;
-   Shape shape;
-   Facet facets;
+   private Shape shape;
+   private Facet facets;
+
+   public void printMatrix(int[] matrix){
+      for (int i = 0; i < matrix.length; i++) {
+             System.out.print(matrix[i] + " ");
+     }
+   }
+
+   public boolean isHexagone(){
+      return isHexagone;
+   }
+
+
+   public void displayPuzzle(){
+      System.out.print(position + ": ");
+      System.out.print("Element :" + shape.getType());
+      System.out.print("[ ");
+      printMatrix(shape.getConcavity());
+      System.out.print(" ] - Rotation: "+shape.getRotation() + "\n");
+
+
+   }
 
    public Puzzle(int i, int[] connections){
       position = i;
-      facets = Facet(connections);
+      facets = new Facet(connections);
       shape = null;
-      if(length(connections) == 6)
+      if(connections.length == 6)
          isHexagone = true;
       else
          isHexagone = false;
@@ -17,20 +38,21 @@ public class Puzzle{
 
    public boolean threatens(Shape newShape){
       //à voir pour l'input de isCompatible
-      if(facets.isCompatible(newShape.concavity) == true){
+      if(facets.isCompatible(newShape.getConcavity()) == true){
          this.shape = newShape;
          return true;
       }
       if(newShape.rotate() == true)
          return threatens(newShape);//newShape a été rotationné
 
+      newShape.resetRotation();
       return false;
    }
 
    public void clearPosition(){
-      facets.clearConnection(shape.concavity);
+      facets.clearConnections(shape.getConcavity());
       shape = null;
    }
 
-   //newShape
+
 }
