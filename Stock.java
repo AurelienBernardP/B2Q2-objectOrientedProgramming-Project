@@ -4,7 +4,7 @@ public class Stock{
    private Node stockUsed;
    private Node stockUnused;
    private Node stockUnusedPenta;
-   public Node currentHexagone;
+   private Node currentHexagone;
    private Node currentPentagone;
 
    public void printMatrix(int[] matrix){
@@ -32,8 +32,10 @@ public class Stock{
       Node currentNode = null;
       int length = nbElements.length;
 
-      if(length < 1)
-         return;//PRINT ERROR
+      if(length < 1){
+         System.out.print("Error\n");
+         return;
+      }
 
       for (int i = 0; i < length; i++){
          //The starting point for all the pentagones in the stock
@@ -63,35 +65,21 @@ public class Stock{
       stockUnusedPenta.setPrevious(null);
       currentHexagone = stockUnused;
       currentPentagone = stockUnusedPenta;
-
-      printList(stockUnused,1);
    }
 
    public Shape getUnused(boolean isHexagone){
       if(isHexagone){
-         if(currentHexagone == null){
+         if(currentHexagone == null)
             return null;
-         }
-         System.out.print("Trying " + currentHexagone.getShape().getType() + ": ");
-         printMatrix(currentHexagone.getShape().getConcavity());
          return currentHexagone.getShape();
       }else{
-         if(currentPentagone == null){
+         if(currentPentagone == null)
             return null;
-         }
-         System.out.print("Trying " + currentPentagone.getShape().getType() + ": ");
-         printMatrix(currentPentagone.getShape().getConcavity());
          return currentPentagone.getShape();
       }
    }
 
    public void usedCurrentElement(boolean isHexagone){
-      /*System.out.print("\nFROM UNUSED TO USED Before \n Used stock \n");
-      printList(stockUsed, 1);
-      System.out.print("\n Unused stock \n");
-      printList(stockUnused, 1);
-      printList(stockUnusedPenta, 1);
-      */
       Node currentElement;
       if(isHexagone)
          currentElement = currentHexagone;
@@ -119,11 +107,11 @@ public class Stock{
          currentHexagone = stockUnused;
          currentPentagone = stockUnusedPenta;
    
-         System.out.print("\n After \n Used stock \n");
+         /*System.out.print("\n After \n Used stock \n");
          printList(stockUsed, 1);
          System.out.print("\n Unused stock \n");
          printList(stockUnused, 1);
-         printList(stockUnusedPenta, 1);
+         printList(stockUnusedPenta, 1);*/
       
    }
 

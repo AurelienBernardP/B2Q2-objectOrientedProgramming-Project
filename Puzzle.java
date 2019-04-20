@@ -17,13 +17,9 @@ public class Puzzle{
 
 
    public void displayPuzzle(){
-      System.out.print(position + ": ");
-      System.out.print("Element :" + shape.getType());
-      System.out.print("[ ");
-      printMatrix(shape.getConcavity());
-      System.out.print(" ] - Rotation: "+shape.getRotation() + "\n");
-
-
+      System.out.print("Position "+ position+ " - ");
+      System.out.print("Element "+ shape.getType()+ " - ");
+      System.out.print("Orientation "+ shape.getRotation()+ "\n");
    }
 
    public Puzzle(int i, int[] connections){

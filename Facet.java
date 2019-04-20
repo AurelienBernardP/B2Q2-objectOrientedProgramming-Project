@@ -1,53 +1,65 @@
-
+/*
+ * Facet is the representation of the facets of a position from the puzzle.
+ * The connections array is an array of integers denoting adjacency with other facets
+ * from a position of the puzzle.
+ * The concavityFacets array is an array of -1, 0, or 1 representing the concavity of 
+ * all the facets of the puzzle.
+ *
+ */
 public class Facet{
-   private final int[] connectionsFacets;
+   private final int[] connections;
    private static int[] concavityFacets = new int [90];
 
+   /**
+   * Facet(int[] connections) is going to initialise the "connections" array.
+   */
    public Facet(int[] connections){
-      connectionsFacets = connections;
+      this.connections = connections;
    }
 
+   /*
+   * boolean isCompatible(int[] concavityShape) verifies if the given concavity
+   * of a shape "concacivtyShape" is compatible with the puzzle.
+   */
+   public boolean isCompatible(int[] concavityShape){
+      int nbEdges;
+      int indexSide;
 
-   public void printMatrix(int[] matrix){
-      for (int i = 0; i < matrix.length; i++) {
-             System.out.print(matrix[i] + " ");
-             if(i == 19 || i == 39 || i == 59 || i == 79)
-              System.out.println();
-     }
-     System.out.println();
-   }
+      nbEdges = connections.length;
+      if(nbEdges != concavityShape.length){
+         System.out.print("Error isCompatible: Size of shape not correct.\n");
+         return false;
+      }
 
-   //Ca change un truc que ce soit indépendant de Shape ou je peuxw
-   //utiliser une variable shape en entrée?
-   public boolean isCompatible(int[] concavityNewShape){
-      int length = connectionsFacets.length;
-      int indexFacet;
+      //Verifies if the shape can fit in the puzzle
+      for (int i = 0; i < nbEdges; i++){
+         indexSide = connections[i] - 1;
 
-      for (int i = 0; i < length; i++){
-         indexFacet = connectionsFacets[i] - 1;
-         //System.out.print("Facet soccer:"+concavityFacets[indexFacet]+ " and shape: " + concavityNewShape[i] + "\n");
-         if(concavityFacets[indexFacet] == 0 ||
-            ((concavityFacets[indexFacet] + concavityNewShape[i]) == 0 ))
-            concavityFacets[indexFacet] += concavityNewShape[i];
+         //If the facet is empty or if the concavity of the shape matches with
+         //the puzzle.
+         if(concavityFacets[indexSide] == 0 ||
+            ((concavityFacets[indexSide] + concavityShape[i]) == 0 ))
+            concavityFacets[indexSide] += concavityShape[i];
          else{
-            //System.out.print("Error facet for: "+indexFacet+ "+ 1 \n");
-            for (int j = 0; j < i; j++){
-               indexFacet = connectionsFacets[j] - 1;
-               concavityFacets[indexFacet] -= concavityNewShape[j];
-            }
+
+            //Deleting all effects done to the puzzle
+            for (int j = 0; j < i; j++)
+               concavityFacets[connections[j]-1] -= concavityShape[j];
             return false;
          }
       }
-      printMatrix(concavityNewShape);
-      printMatrix(concavityFacets);
       return true;
    }
 
+   /*
+   * void clearConnections(int[] concavityShape) deletes all effects done to the puzzle
+   * from the concavity of the shape "concavityShape".
+   */
    public void clearConnections(int[] concavityShape){
-      int length = connectionsFacets.length;
+      int nbEdges = connections.length;
 
-      for (int i = 0; i < length; i++)
-         concavityFacets[connectionsFacets[i]-1] -= concavityShape[i];
+      for (int i = 0; i < nbEdges; i++)
+         concavityFacets[connections[i]-1] -= concavityShape[i];
    }
 
 }

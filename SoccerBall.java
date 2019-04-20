@@ -1,8 +1,9 @@
 
 public class SoccerBall{
-   private static Puzzle[] puzzle = new Puzzle[32];
+   private static int nbPosition;
    private static Stock stock;
-   private static int tmp = 32;
+   private static Puzzle[] puzzle = new Puzzle[32];
+
 
    private static void findSolution(int position){
       if(position < 0){
@@ -10,11 +11,10 @@ public class SoccerBall{
          return;
       }
 
-      if(position == tmp){
+      if(position == nbPosition)
          return;
-      }
 
-      System.out.print("For position: "+ position+ "\n");
+
       boolean isHexagone = puzzle[position].isHexagone();
       Shape shape = stock.getUnused(isHexagone);
       if(shape == null){
@@ -25,7 +25,6 @@ public class SoccerBall{
       }
 
       if(puzzle[position].threatens(shape) == true){
-         
          stock.usedCurrentElement(isHexagone);
          findSolution(position + 1);
       }
@@ -35,30 +34,17 @@ public class SoccerBall{
       }
    }
 
-public static void printMatrix(int[] matrix){
-   for (int i = 0; i < matrix.length; i++) {
-          System.out.print(matrix[i] + " ");
-      }
-      System.out.println();
-}
-
    public static void main(String[] args){
       Data data = new Data();
-      Shape shape;
       stock = new Stock(data.ELEMENTS_SIDES, data.NB_ELEMENTS);
+      nbPosition = data.CONNECTIONS.length;
 
-      /*for (int i = 0; i < 5; i++) {
-         shape = stock.getUnused(true);
-         stock.usedCurrentElement(true);
-         stock.undoUsedElement(true);
-      }*/
-      for (int i = 0; i < 32; i++){
+      for (int i = 0; i < nbPosition; i++)
          puzzle[i] =  new Puzzle(i+1, data.CONNECTIONS[i]);
-      }
-      findSolution(0);
-      System.out.print("Yas queen slaaaay\n");
 
-      for (int i = 0; i < tmp; i++)
+      findSolution(0);
+
+      for (int i = 0; i < nbPosition; i++)
          puzzle[i].displayPuzzle();
 
       return;
