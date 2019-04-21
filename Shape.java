@@ -1,6 +1,6 @@
 /*
  * Shape is the representation of a shape.
- * The type integer is the number of the element that this shape represents.
+ * The type integer is the unique number of the element that this shape represents.
  * The rotation integer indicates if the number of rotations done to the shape.
  * The concavity array is an array of -1, 0, or 1 representing the concavity of 
  * of the shape.

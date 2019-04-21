@@ -1,9 +1,10 @@
 /*
- * Data provided to solve the soccer ball puzzle. The CONNECTIONS array is a 2D array containing 
- * 32 lines (for 32 facets), each line providing the associated connection numbers seen on 
- * soccer_ball_net.pdf, while ELEMENTS_SIDES and NB_LINES provide respectively the concavity and 
- * convexity of each side of a piece and the amount of occurrences for each different piece. The 
- * pieces are depicted in soccer_ball_pieces.pdf.
+ * Data provided to solve the soccer ball puzzle. The CONNECTIONS array is a 2D array
+ * containing 32 lines (for 32 facets), each line providing the associated connection
+ * numbers seen on soccer_ball_net.pdf, while ELEMENTS_SIDES and NB_LINES provide
+ * respectively the concavity and convexity of each side of a piece and the amount of 
+ * occurrences for each different piece. The pieces are depicted in 
+ * soccer_ball_pieces.pdf.
  *
  * Using the .length operator on these arrays can be useful to retrieve:
  * -the amount of facets,

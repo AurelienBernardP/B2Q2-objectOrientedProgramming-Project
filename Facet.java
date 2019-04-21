@@ -1,7 +1,7 @@
 /*
- * Facet is the representation of the facets of a position from the puzzle.
+ * Facet is the representation of the connections between pieces of the net.
  * The connections array is an array of integers denoting adjacency with other facets
- * from a position of the puzzle.
+ * between pieces of the net.
  * The concavityFacets array is an array of -1, 0, or 1 representing the concavity of 
  * all the facets of the puzzle.
  *

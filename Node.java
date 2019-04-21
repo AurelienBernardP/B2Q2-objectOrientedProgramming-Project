@@ -1,48 +1,35 @@
 /*
- * INFO0062 - Object-oriented programming
- * Exercise session #2
- *
- * Auxiliary class modeling an element of a linked list. Note that this class is designed to store 
- * a String (for the example), but you can of course modify it to store any other kind of object.
- *
- * @author: J.-F. Grailet
+ * Node is an auxiliary class modeling an element of a linked list.
  */
 
-public class Node
-{
-    private Shape shape;
+public class Node{
+    private Shape element;
     private Node previous;
     private Node next;
     
-    public Node(Shape s)
-    {
-        shape = s;
+    public Node(Shape s){
+        element = s;
         previous = null;
         next = null;
     }
     
-    public Node getPrevious()
-    {
+    public Node getPrevious(){
         return previous;
     }
     
-    public void setPrevious(Node n)
-    {
+    public void setPrevious(Node n){
         previous = n;
     }
 
-    public Node getNext()
-    {
+    public Node getNext(){
         return next;
     }
     
-    public void setNext(Node n)
-    {
+    public void setNext(Node n){
         next = n;
     }
     
-    public Shape getShape()
-    {
-        return shape;
+    public Shape getShape(){
+        return element;
     }
 }
