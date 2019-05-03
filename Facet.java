@@ -7,14 +7,24 @@
  *
  */
 public class Facet{
+   private static int nbEdges;
+   private static int sizeConcavityFacets = 100;
+   private final int multiplicativeFactor = 5;
    private final int[] connections;
-   private static int[] concavityFacets = new int [90];
+   private static int[] concavityFacets = new int [sizeConcavityFacets];
 
    /**
    * Facet(int[] connections) is going to initialise the "connections" array.
    */
    public Facet(int[] connections){
       this.connections = connections;
+      this.nbEdges += connections.length;
+
+      //If the number of edges are greater than expected, reallocation is done
+      if(nbEdges > sizeConcavityFacets){
+         sizeConcavityFacets *= multiplicativeFactor;
+         concavityFacets = new int [sizeConcavityFacets];
+      }
    }
 
    /*

@@ -9,58 +9,7 @@ public class SoccerBall{
    private static int nbNetPieces;
    private static Stock stock;
    private static Data data;
-   private static Net[] puzzle = new Net[32];
-
-   /*
-   *  boolean verificationData(Data data) does some verifications
-   * on the given data in order to ensure a possible solution for 
-   * the puzzle.
-   */
-   private static boolean verificationData(Data data){
-
-      //The number of positions of the puzzle.
-      nbNetPieces = data.CONNECTIONS.length;
-      if(nbNetPieces != 32){
-         System.out.print("Not expected number of connections!\n");
-         return false;
-      }
-
-      //The length of the arrays representing the available pieces.
-      if(data.ELEMENTS_SIDES.length != data.NB_ELEMENTS.length){
-         System.out.print("Error size of ELEMENTS_SIDES and NB_ELEMENTS \n");
-         return false;
-      }
-
-      //The sum of the array NB_ELEMENTS must have the same number
-      //of positions in the puzzle.
-      int nbPieces = 0;
-      for (int i = 0; i < data.NB_ELEMENTS.length; i++)
-         nbPieces += data.NB_ELEMENTS[i];
-      if(nbPieces != nbNetPieces){
-         System.out.print("Not enough elements to solve the puzzle!\n");
-         return false;
-      }
-
-      //Verifies the number of given hexagones
-      int nbHexagones = 0;
-      for (int i = 0; i < 10; i++)
-         nbHexagones += data.NB_ELEMENTS[i];
-      if(nbHexagones != 20){
-         System.out.print("Not enough hexagones to solve the puzzle!\n");
-         return false;
-      }
-
-      //Verifies the number of given pentagones
-      int nbPentagones = 0;
-      for (int i = 10; i < 14; i++)
-         nbPentagones += data.NB_ELEMENTS[i];
-      if(nbPentagones != 12){
-         System.out.print("Not enough pentagones to solve the puzzle!\n");
-         return false;
-      }
-
-      return true;
-   }
+   private static Net[] puzzle;
 
    /*
    *  boolean findSolution(int position) is the main algorithm
@@ -108,15 +57,19 @@ public class SoccerBall{
    }
 
    public static void main(String[] args){
-      //Verification of the data
+      //Fetch the given data for this puzzle.
       data = new Data();
-      if(verificationData(data) == false)
+      nbNetPieces = data.CONNECTIONS.length;
+      if(data.ELEMENTS_SIDES.length != data.NB_ELEMENTS.length){
+         System.out.print("Error in the given data.\n");
          return;
+      }
 
       //Initialise stocks which contain the unused pieces
       stock = new Stock(data.ELEMENTS_SIDES, data.NB_ELEMENTS);
 
       //Initialise the map of the soccer ball puzzle
+      puzzle = new Net[nbNetPieces];
       for (int i = 0; i < nbNetPieces; i++)
          puzzle[i] =  new Net(i+1, data.CONNECTIONS[i]);
 
