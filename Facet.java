@@ -14,7 +14,8 @@ public class Facet{
    private static int[] concavityFacets = new int [sizeConcavityFacets];
 
    /**
-   * Facet(int[] connections) is going to initialise the "connections" array.
+   * Facet(int[] connections) is going to initialise the "connections" array
+   * keep track of the number of edges in the net.
    */
    public Facet(int[] connections){
       this.connections = connections;
@@ -32,17 +33,17 @@ public class Facet{
    * of a shape "concacivtyShape" is compatible with the puzzle.
    */
    public boolean isCompatible(int[] concavityShape){
-      int nbEdges;
+      int nbEdgesShape;
       int indexSide;
 
-      nbEdges = connections.length;
-      if(nbEdges != concavityShape.length){
+      nbEdgesShape = connections.length;
+      if(nbEdgesShape != concavityShape.length){
          System.out.print("Error isCompatible: Size of shape not correct.\n");
          return false;
       }
 
       //Verifies if the shape can fit in the puzzle
-      for (int i = 0; i < nbEdges; i++){
+      for (int i = 0; i < nbEdgesShape; i++){
          indexSide = connections[i] - 1;
 
          //If the facet is empty or if the concavity of the shape matches with
@@ -66,9 +67,9 @@ public class Facet{
    * from the concavity of the shape "concavityShape".
    */
    public void clearConnections(int[] concavityShape){
-      int nbEdges = connections.length;
+      int nbEdgesShape = connections.length;
 
-      for (int i = 0; i < nbEdges; i++)
+      for (int i = 0; i < nbEdgesShape; i++)
          concavityFacets[connections[i]-1] -= concavityShape[i];
    }
 

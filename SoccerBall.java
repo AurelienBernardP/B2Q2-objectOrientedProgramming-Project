@@ -13,7 +13,7 @@ public class SoccerBall{
 
    /*
    *  boolean findSolution(int position) is the main algorithm
-   *  which solves the puzzle basaed on given data.
+   *  which solves the puzzle based on given data.
    *  position represents the unique number of the current piece
    *  of the net which will be filled by an element.
    */
